@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ppx.blog.mapper.LogMapper" >
+  <resultMap id="BaseResultMap" type="com.ppx.blog.model.entity.Log" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="action" property="action" jdbcType="VARCHAR" />
+    <result column="data" property="data" jdbcType="VARCHAR" />
+    <result column="author_id" property="authorId" jdbcType="INTEGER" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, action, data, author_id, ip, created
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ppx.blog.model.entity.Log" >
+    insert into log (id, action, data, 
+      author_id, ip, created
+      )
+    values (#{id,jdbcType=INTEGER}, #{action,jdbcType=VARCHAR}, #{data,jdbcType=VARCHAR}, 
+      #{authorId,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ppx.blog.model.entity.Log" >
+    insert into log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="action != null" >
+        action,
+      </if>
+      <if test="data != null" >
+        data,
+      </if>
+      <if test="authorId != null" >
+        author_id,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="created != null" >
+        created,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="action != null" >
+        #{action,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null" >
+        #{data,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null" >
+        #{authorId,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ppx.blog.model.entity.Log" >
+    update log
+    <set >
+      <if test="action != null" >
+        action = #{action,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null" >
+        data = #{data,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null" >
+        author_id = #{authorId,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ppx.blog.model.entity.Log" >
+    update log
+    set action = #{action,jdbcType=VARCHAR},
+      data = #{data,jdbcType=VARCHAR},
+      author_id = #{authorId,jdbcType=INTEGER},
+      ip = #{ip,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

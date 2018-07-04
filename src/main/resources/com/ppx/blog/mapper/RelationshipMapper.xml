@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ppx.blog.mapper.RelationshipMapper" >
+  <resultMap id="BaseResultMap" type="com.ppx.blog.model.entity.Relationship" >
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="mid" property="mid" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.ppx.blog.model.entity.Relationship" >
+    insert into relationship (cid, mid)
+    values (#{cid,jdbcType=INTEGER}, #{mid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ppx.blog.model.entity.Relationship" >
+    insert into relationship
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="mid != null" >
+        mid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="mid != null" >
+        #{mid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>
